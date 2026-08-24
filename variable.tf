@@ -1,10 +1,10 @@
 variable "project" {
    
-     default = "roboshop"
+     type  = string
 }
 
 variable "env" {
-     default = "dev"
+     type = string
 }
 
 variable "cidr_block" {
