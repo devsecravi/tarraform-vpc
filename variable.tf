@@ -77,3 +77,9 @@ variable "ng_tags" {
        type = map
        default = {}
 }
+
+variable "is_peering_connection" {
+
+      type = bool
+      default = "false"
+}
