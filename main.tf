@@ -121,3 +121,34 @@ resource "aws_route" "public" {
   gateway_id = aws_internet_gateway.gw.id
 }
 
+resource "aws_eip" "nat" {
+
+  domain   = "vpc"
+  tags = merge(
+
+       local.common_tags,
+       {
+           Name = "${var.project}-{var.env}-nat";
+       },
+       var.eip_tags
+  )
+   
+}
+
+resource "aws_nat_gateway" "main" {
+  allocation_id = aws_eip.nat.id
+  subnet_id     = aws_subnet.public.id
+
+  tags = merge(
+        local.common_tags,
+        {
+           Name = "${var.project}-${var.env}"
+        },
+        var.ng_tags
+  )
+
+  # To ensure proper ordering, it is recommended to add an explicit dependency
+  # on the Internet Gateway for the VPC.
+  depends_on = [aws_internet_gateway.main]
+}
+
