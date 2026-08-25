@@ -48,3 +48,21 @@ variable "private_subnets"{
 variable "database_subnets"{
     default = {}
 }
+
+variable "public_route_table" {
+
+       type = map
+       default = {}
+}
+
+variable "private_route_table" {
+
+       type = map
+       default = {}
+}
+
+variable "database_route_table" {
+
+       type = map
+       default = {}
+}
